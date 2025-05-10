@@ -1,0 +1,109 @@
+{
+	"name": "ivansaga/tenants",
+	"version": "0.0.1",
+	"type": "project",
+	"license": "MIT",
+	"description": "Project to test a multi tenant application built in Symfony and Clean Architecture",
+	"minimum-stability": "stable",
+	"prefer-stable": true,
+	"require": {
+		"php": ">=8.4.6",
+		"ext-ctype": "*",
+		"ext-iconv": "*",
+		"doctrine/dbal": "4.2.3",
+		"doctrine/doctrine-bundle": "2.14.0",
+		"doctrine/doctrine-migrations-bundle": "3.4.1",
+		"doctrine/orm": "3.3.2",
+		"gedmo/doctrine-extensions": "3.20.0",
+		"hidehalo/nanoid-php": "2.0",
+		"mikey179/vfsstream": "1.6.12",
+		"phpdocumentor/reflection-docblock": "^5.6.2",
+		"phpstan/phpdoc-parser": "^2.1",
+		"runtime/frankenphp-symfony": "^0.2.0",
+		"stof/doctrine-extensions-bundle": "1.14.0",
+		"symfony/console": "7.2.5",
+		"symfony/doctrine-messenger": "7.2.5",
+		"symfony/dotenv": "7.2.0",
+		"symfony/flex": "2.5.0",
+		"symfony/framework-bundle": "7.2.5",
+		"symfony/messenger": "7.2.5",
+		"symfony/property-access": "7.2.*",
+		"symfony/property-info": "7.2.*",
+		"symfony/runtime": "7.2.3",
+		"symfony/serializer": "7.2.*",
+		"symfony/validator": "7.2.5",
+		"symfony/yaml": "7.2.5"
+	},
+	"require-dev": {
+		"fakerphp/faker": "1.24.1",
+		"phpunit/phpunit": "12.1.3",
+		"symfony/maker-bundle": "1.63.0",
+		"symfony/browser-kit": "7.2.4",
+		"symplify/easy-coding-standard": "12.5.16",
+		"dg/bypass-finals": "1.9.0"
+	},
+	"config": {
+		"allow-plugins": {
+			"php-http/discovery": true,
+			"symfony/flex": false,
+			"symfony/runtime": true
+		},
+		"bump-after-update": true,
+		"sort-packages": true,
+		"optimize-autoloader": true,
+		"preferred-install": {
+			"*": "dist"
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Tenants\\": "src/",
+			"Tenants\\Api\\": "apps/api/src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tenants\\Tests\\": "tests/"
+		}
+	},
+	"replace": {
+		"symfony/polyfill-ctype": "*",
+		"symfony/polyfill-iconv": "*",
+		"symfony/polyfill-php72": "*",
+		"symfony/polyfill-php73": "*",
+		"symfony/polyfill-php74": "*",
+		"symfony/polyfill-php80": "*",
+		"symfony/polyfill-php81": "*",
+		"symfony/polyfill-php82": "*",
+		"symfony/polyfill-php83": "*",
+		"symfony/polyfill-php84": "*"
+
+	},
+	"scripts": {
+		"check-cs": "vendor/bin/ecs check --ansi",
+		"fix-cs": "vendor/bin/ecs check --fix --ansi",
+		"auto-scripts": {
+			"cache:clear": "symfony-cmd",
+			"assets:install %PUBLIC_DIR%": "symfony-cmd"
+		},
+		"post-install-cmd": [],
+		"post-update-cmd": []
+	},
+	"conflict": {
+		"symfony/symfony": "*"
+	},
+	"extra": {
+		"src-dir": "apps/api/src",
+		"config-dir": "apps/api/config",
+		"public-dir": "apps/api/public",
+		"bin-dir": "apps/api/bin",
+		"symfony": {
+			"allow-contrib": false,
+			"require": "7.2.*",
+			"docker": true
+		},
+		"preferred-install": {
+			"*": "dist"
+		}
+	}
+}

@@ -1,0 +1,27 @@
+services:
+
+    tenants-api:
+        image: ${API_CONTAINER_IMAGE_NAME}:dev
+        build:
+            target: frankenphp_dev
+        volumes:
+            - ./:/app:delegated
+            - ./var:/app/var
+            - ./etc/caddy/api.Caddyfile:/etc/caddy/Caddyfile:ro
+            - ./etc/frankenphp/conf.d/20-app.dev.ini:/usr/local/etc/php/app.conf.d/20-app.dev.ini:ro
+            # If you develop on Mac or Windows you can remove the vendor/ directory
+            #  from the bind-mount for better performance by enabling the next line:
+            # - /app/vendor
+        environment:
+            FRANKENPHP_WORKER_CONFIG: worker ./public/index.php
+            XDEBUG_MODE: "${XDEBUG_MODE}"
+            APP_ENV: "${APP_ENV}"
+            DATABASE_URL: "${API_DATABASE_URL}"
+            #CADDY_SERVER_LOG_OPTIONS: warn
+        extra_hosts:
+            - host.docker.internal:host-gateway
+        tty: true
+
+    ###> doctrine/doctrine-bundle ###
+    #tenants_postgresql:
+    #    image: tenants_postgresql:dev

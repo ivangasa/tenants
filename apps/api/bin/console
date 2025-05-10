@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+use Tenants\Api\Kernel;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+
+if (!is_file(dirname(__DIR__, 3) . '/vendor/autoload_runtime.php')) {
+    throw new LogicException('Symfony Runtime is missing. Try running "composer require symfony/runtime".');
+}
+
+require_once dirname(__DIR__, 3) . '/vendor/autoload_runtime.php';
+
+return function (array $context) {
+    $kernel = new Kernel($context['APP_ENV'], filter_var($context['APP_DEBUG'], FILTER_VALIDATE_BOOLEAN));
+    return new Application($kernel);
+};

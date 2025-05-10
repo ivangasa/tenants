@@ -1,0 +1,36 @@
+{
+	email tenants@local.com
+
+	frankenphp {
+		worker {
+			file /app/apps/api/public/index.php
+			env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
+		}
+	}
+}
+
+https://api-tenants.localhost {
+
+	root * /app/apps/api/public
+	encode zstd br gzip
+
+	log {
+		output file /var/log/api/api_access.log
+	}
+
+	# Desactivar seguimiento de Topics si no está habilitado explícitamente
+	header ?Permissions-Policy "browsing-topics=()"
+
+	@phpRoute {
+		not path /.well-known/mercure*
+		not file {path}
+	}
+	rewrite @phpRoute /index.php
+
+	@frontController path /index.php
+	php @frontController
+
+	file_server {
+		hide *.php
+	}
+}

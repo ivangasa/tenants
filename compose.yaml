@@ -1,6 +1,6 @@
 services:
 
-    tenants-api:
+    tenants_api:
         container_name: ${API_CONTAINER_NAME}
         image: ${API_CONTAINER_IMAGE_NAME}
         restart: unless-stopped

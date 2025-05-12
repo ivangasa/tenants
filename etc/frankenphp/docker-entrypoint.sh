@@ -43,7 +43,7 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		APP_UPPERCASED=${APP^^}
 		printf "\n\n"
 		echo "#################################"
-		echo " ⚠️  ${APP_UPPERCASED} CONFIGURATION"
+		echo " ⚠️  ${APP_UPPERCASED} app CONFIGURATION"
 		php "./apps/$APP/bin/console" -V
 		echo "	-> FrankenPHP worker mode: $FRANKENPHP_WORKER_CONFIG"
 		echo "#################################"

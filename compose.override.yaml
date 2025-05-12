@@ -1,6 +1,6 @@
 services:
 
-    tenants-api:
+    tenants_api:
         image: ${API_CONTAINER_IMAGE_NAME}:dev
         build:
             target: frankenphp_dev
@@ -13,7 +13,7 @@ services:
             #  from the bind-mount for better performance by enabling the next line:
             # - /app/vendor
         environment:
-            FRANKENPHP_WORKER_CONFIG: worker ./public/index.php
+            FRANKENPHP_WORKER_CONFIG: watch
             XDEBUG_MODE: "${XDEBUG_MODE}"
             APP_ENV: "${APP_ENV}"
             DATABASE_URL: "${API_DATABASE_URL}"

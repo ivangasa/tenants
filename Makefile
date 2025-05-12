@@ -10,11 +10,11 @@ GUID = "$(UID):$(GID)"
 CURRENT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 WORKING_DIR = /app
 
-DOCKER_CONTAINER_NAME = tenants
-DOCKER_EXEC = docker exec -it -w $(WORKING_DIR) $(DOCKER_CONTAINER_NAME) bash
+API_CONTAINER_NAME = tenants_api
+API_DOCKER_EXEC = docker exec -it -w $(WORKING_DIR) $(API_CONTAINER_NAME) bash
 
 ##
-## ——  🐳   Project Tooling & Docker  ———————————————————————————————————————————————————————
+## ——  🐳   General Project Tooling  ———————————————————————————————————————————————————————
 build: ## Install project libraries
 build: clean
 build:
@@ -27,7 +27,7 @@ clean:
 	# @rm -rf vendor
 	@rm -rf var/cache
 	@rm -rf var/reports
-	@rm -rf var/log
+	@rm -rf var/logs
 	@rm -rf etc/postgresql/data
 	@rm -f *.lock
 	@docker compose down --rmi all -v --remove-orphans
@@ -35,6 +35,45 @@ clean:
 start: ## Start Docker containers
 	@clear
 	@docker compose up
+
+stop: ## Stop Docker containers
+	@clear
+	@docker compose stop
+
+restart: ## Restart Docker containers
+restart: stop start
+
+ps: ## List Docker containers
+	@docker ps
+
+##
+## ——  🧩   API app  ———————————————————————————————————————————————————————————————————————
+bash-api: ## Opens an interactive shell inside api container
+bash-api:
+	@clear
+	@$(API_DOCKER_EXEC)
+
+trust-api: ## Install certificates
+	@docker compose cp tenants_api:/data/caddy/pki/authorities/local/root.crt /tmp/root.crt && sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /tmp/root.crt
+
+
+##
+## —— ✅  Testing ————————————————————————————————————————————————————————————————————————
+tests: ## Run ALL tests
+tests: tests-unit tests-functional tests-integration
+
+tests-unit: ## Run Unit tests
+	@$(API_DOCKER_EXEC) -c "vendor/bin/phpunit --testdox --color=always --no-coverage --testsuite unit"
+
+tests-functional: ## Run Functional tests
+	@$(API_DOCKER_EXEC) -c "vendor/bin/phpunit --testdox --color=always --no-coverage --testsuite functional"
+
+tests-integration: ## Run Integration tests
+	@$(API_DOCKER_EXEC) -c "vendor/bin/phpunit --testdox --color=always --no-coverage --testsuite integration"
+
+coverage: ## Create Testing Coverage report
+	@clear
+	@$(API_DOCKER_EXEC) -c "XDEBUG_MODE=coverage vendor/bin/phpunit --testdox --color=always --testsuite unit,integration"
 
 
 ##

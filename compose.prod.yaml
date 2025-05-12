@@ -1,8 +1,9 @@
 # Production environment override
 services:
 
-    tenants-api:
+    tenants_api:
         build:
             target: frankenphp_prod
         environment:
             APP_SECRET: ${APP_SECRET}
+            FRANKENPHP_WORKER_CONFIG: worker ./public/index.php

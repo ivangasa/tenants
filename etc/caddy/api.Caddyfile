@@ -7,18 +7,22 @@
 			env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
 		}
 	}
+
+    log {
+		level WARN
+    }
 }
 
 https://api-tenants.localhost {
 
 	root * /app/apps/api/public
 	encode zstd br gzip
+	tls internal
 
 	log {
 		output file /var/log/api/api_access.log
 	}
 
-	# Desactivar seguimiento de Topics si no está habilitado explícitamente
 	header ?Permissions-Policy "browsing-topics=()"
 
 	@phpRoute {

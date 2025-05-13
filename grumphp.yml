@@ -1,0 +1,14 @@
+grumphp:
+    git_hook_variables:
+        EXEC_GRUMPHP_COMMAND: 'docker exec -u $(id -u) -w /app tenants_api php'
+
+
+    tasks:
+        composer:
+            file: ./composer.json
+            no_check_all: true
+            no_check_lock: false
+            no_check_publish: false
+            no_local_repository: false
+            with_dependencies: true
+            strict: false

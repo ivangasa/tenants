@@ -1,6 +1,6 @@
 grumphp:
     git_hook_variables:
-        EXEC_GRUMPHP_COMMAND: 'docker exec -u $(id -u) -w /app tenants_api php'
+        EXEC_GRUMPHP_COMMAND: docker exec -u $(id -u) tenants_api php
 
 
     tasks:

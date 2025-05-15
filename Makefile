@@ -60,6 +60,9 @@ trust-api: ## Install certificates
 ##
 ## —— 💎  Code Quality ———————————————————————————————————————————————————————————————————
 
+stan: ## Run PhpStan to find bugs in your codebase
+	@$(API_DOCKER_EXEC) -c "vendor/bin/phpstan analyse"
+
 ecs: ## Run ecs in read-only mode to check Coding Standards
 	@$(API_DOCKER_EXEC) -c "composer check-ecs"
 

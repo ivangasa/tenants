@@ -58,6 +58,15 @@ trust-api: ## Install certificates
 
 
 ##
+## —— 💎  Code Quality ———————————————————————————————————————————————————————————————————
+
+ecs: ## Run ecs in read-only mode to check Coding Standards
+	@$(API_DOCKER_EXEC) -c "composer check-ecs"
+
+ecs-fix: ## Run ecs in fix mode
+	@$(API_DOCKER_EXEC) -c "composer fix-ecs"
+
+##
 ## —— ✅  Testing ————————————————————————————————————————————————————————————————————————
 tests: ## Run ALL tests
 tests: tests-unit tests-functional tests-integration

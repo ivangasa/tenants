@@ -7,7 +7,6 @@ namespace Tenants\Tests\Unit\Shared\Domain\ValueObject;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tenants\Shared\Domain\ValueObject\Exception\InvalidNanoIdException;
-use Tenants\Shared\Domain\ValueObject\NanoId;
 use Tenants\Tests\Unit\Shared\Domain\Mother\NanoIdMother;
 
 final class NanoIdTest extends TestCase
@@ -29,9 +28,7 @@ final class NanoIdTest extends TestCase
         $nanoId = 'invalidLength';
 
         $this->expectException(InvalidNanoIdException::class);
-        $this->expectExceptionMessage(
-            InvalidNanoIdException::fromInvalidLength($nanoId)->getMessage()
-        );
+        $this->expectExceptionMessage(InvalidNanoIdException::fromInvalidLength($nanoId)->getMessage());
 
         NanoIdMother::fromString($nanoId);
     }
@@ -42,9 +39,7 @@ final class NanoIdTest extends TestCase
         $nanoId = '12345678901%';
 
         $this->expectException(InvalidNanoIdException::class);
-        $this->expectExceptionMessage(
-            InvalidNanoIdException::fromInvalidNanoId($nanoId)->getMessage()
-        );
+        $this->expectExceptionMessage(InvalidNanoIdException::fromInvalidNanoId($nanoId)->getMessage());
 
         NanoIdMother::fromString($nanoId);
     }

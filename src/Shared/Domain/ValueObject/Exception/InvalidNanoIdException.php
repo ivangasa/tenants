@@ -15,17 +15,11 @@ final class InvalidNanoIdException extends DomainException
 
     public static function fromInvalidLength(string $nanoId): self
     {
-        return new self(sprintf(
-            self::INVALID_LENGTH_MESSAGE_KEY,
-            $nanoId
-        ));
+        return new self(sprintf(self::INVALID_LENGTH_MESSAGE_KEY, $nanoId));
     }
 
     public static function fromInvalidNanoId(string $nanoId): self
     {
-        return new self(sprintf(
-            self::INVALID_ALPHABET_MESSAGE_KEY,
-            $nanoId
-        ));
+        return new self(sprintf(self::INVALID_ALPHABET_MESSAGE_KEY, $nanoId));
     }
 }

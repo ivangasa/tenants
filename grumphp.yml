@@ -2,9 +2,7 @@ grumphp:
     git_hook_variables:
         EXEC_GRUMPHP_COMMAND: docker exec -t tenants_api sh -c "XDEBUG_MODE=off vendor/bin/grumphp --config=grumphp.yml run --no-interaction"
 
-
     tasks:
-
         # https://github.com/phpro/grumphp/blob/v2.x/doc/tasks/composer.md
         composer:
             file: ./composer.json
@@ -15,15 +13,24 @@ grumphp:
             with_dependencies: true
             strict: true
 
-        # https://github.com/phpro/grumphp/blob/master/doc/tasks/ecs.md
-        ecs:
-            config: ./ecs.php
-            level: ~
-            paths: [ ]
-            files_on_pre_commit: false
-            triggered_by: [ 'php' ]
-            clear-cache: false
-            no-progress-bar: true
+        # https://github.com/phpro/grumphp/blob/v2.x/doc/tasks/securitychecker/composeraudit.md
+        securitychecker_composeraudit:
+            abandoned: report
+            format: table
+            locked: true
+            no_dev: false
+            run_always: false
+            working_dir: null
+
+        # https://github.com/phpro/grumphp/blob/v2.x/doc/tasks/securitychecker/symfony.md
+        securitychecker_symfony:
+            lockfile: ./composer.lock
+            format: ~
+            run_always: false
+
+        # https://github.com/phpro/grumphp/blob/v2.x/doc/tasks/deptrac.md
+        deptrac:
+            depfile: ./deptrac.yaml
 
         # https://github.com/phpro/grumphp/blob/v2.x/doc/tasks/phpstan.md
         phpstan:
@@ -35,3 +42,18 @@ grumphp:
             triggered_by: [ 'php' ]
             memory_limit: "-1"
             use_grumphp_paths: false
+
+        # https://github.com/phpro/grumphp/blob/master/doc/tasks/ecs.md
+        ecs:
+            config: ./ecs.php
+            level: ~
+            paths: [ ]
+            files_on_pre_commit: false
+            triggered_by: [ 'php' ]
+            clear-cache: false
+            no-progress-bar: true
+
+        infection:
+            threads: 6
+            only_covered: true
+            configuration: ./infection.json5

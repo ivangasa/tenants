@@ -58,7 +58,7 @@ trust-api: ## Install certificates
 
 
 ##
-## —— 💎  Code Quality ———————————————————————————————————————————————————————————————————
+## ——  💎  Code Quality ————————————————————————————————————————————————————————————————————
 
 stan: ## Run PhpStan to find bugs in your codebase
 	@$(API_DOCKER_EXEC) -c "vendor/bin/phpstan analyse"
@@ -69,8 +69,17 @@ ecs: ## Run ecs in read-only mode to check Coding Standards
 ecs-fix: ## Run ecs in fix mode
 	@$(API_DOCKER_EXEC) -c "composer fix-ecs"
 
+infection: ## Run Infection to tests mutants
+	@$(API_DOCKER_EXEC) -c "vendor/bin/infection --threads=6 --only-covered"
+
+deptrac: ## Run Deptrac to analyze if we are following Hexagonal Architecture
+	@mkdir -p var/reports/deptrac
+	@$(API_DOCKER_EXEC) -c "vendor/bin/deptrac analyze --formatter graphviz-dot --output=./var/reports/deptrac/tenants-architecture.dot" || true
+	@$(API_DOCKER_EXEC) -c "vendor/bin/deptrac analyze --formatter graphviz-image --output=./var/reports/deptrac/tenants-architecture.svg" || true
+	@$(API_DOCKER_EXEC) -c "vendor/bin/deptrac analyze"
+
 ##
-## —— ✅  Testing ————————————————————————————————————————————————————————————————————————
+## ——  ✅  Testing —————————————————————————————————————————————————————————————————————————
 tests: ## Run ALL tests
 tests: tests-unit tests-functional tests-integration
 

@@ -1,0 +1,26 @@
+{
+    "$schema": "vendor/infection/infection/resources/schema.json",
+    "source": {
+        "directories": [
+            "apps",
+            "src"
+        ],
+        "excludes": [
+            "vendor",
+            "tests",
+            "var"
+        ]
+    },
+    "logs": {
+        "text": "./var/reports/infection/infection.log",
+        "html": "./var/reports/infection/infection.html",
+        "summary": "./var/reports/infection/infection-summary.txt",
+    },
+    "tmpDir": "/var/cache/infection/infection",
+    "minMsi": 80,
+    "minCoveredMsi": 100,
+    "testFramework":"phpunit",
+    "mutators": {
+        "@default": true
+    }
+}

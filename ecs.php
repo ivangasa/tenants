@@ -10,7 +10,6 @@ use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Import\GlobalNamespaceImportFixer;
 use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
-use PhpCsFixer\Fixer\Operator\NotOperatorWithSuccessorSpaceFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocLineSpanFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitMethodCasingFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
@@ -28,10 +27,7 @@ return ECSConfig::configure()
     ->withCache('var/cache/.ecs_cache')
     ->withParallel()
 
-    ->withSkip([
-        PhpdocLineSpanFixer::class,
-        NotOperatorWithSuccessorSpaceFixer::class,   # add space after negation !true -> ! true
-    ])
+    ->withSkip([])
 
     ->withSets([
         SetList::SPACES,

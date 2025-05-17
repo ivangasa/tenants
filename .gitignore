@@ -17,3 +17,5 @@
 /phpunit.xml
 /.phpunit.cache/
 ###< phpunit/phpunit ###
+
+.DS_Store

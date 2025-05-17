@@ -36,7 +36,7 @@ final class NanoIdTest extends TestCase
     #[Test]
     public function should_throw_an_exception_for_invalid_alphabet_nano_id(): void
     {
-        $nanoId = '12345678901%';
+        $nanoId = '12345678901234%';
 
         $this->expectException(InvalidNanoIdException::class);
         $this->expectExceptionMessage(InvalidNanoIdException::fromInvalidNanoId($nanoId)->getMessage());

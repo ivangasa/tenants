@@ -1,0 +1,7 @@
+parameters:
+    level: max
+    tmpDir: var/cache/.phpstan
+    paths:
+        - apps/
+        - src/
+        - tests/

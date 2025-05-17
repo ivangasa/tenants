@@ -58,7 +58,12 @@ ENV FRANKENPHP_WORKER_CONFIG=watch
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    graphviz \
     libnss3-tools;
+
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
+RUN apt install symfony-cli -y
+
 
 RUN set -eux; \
 	install-php-extensions \

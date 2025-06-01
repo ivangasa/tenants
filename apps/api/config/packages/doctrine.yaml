@@ -1,0 +1,31 @@
+doctrine:
+    dbal:
+        default_connection: shared_tenants
+
+        connections:
+
+            # This is the shared connection where tenants configuration lays in
+            shared_tenants:
+                server_version: '%env(COMMON_POSTGRES_DB_VERSION)%'
+                driver: pdo_pgsql
+                logging: false
+                profiling: false
+
+
+    orm:
+        default_entity_manager: shared_tenants
+        entity_managers:
+            shared_tenants:
+                metadata_cache_driver:
+                    type: pool
+                    pool: doctrine.system_cache_pool
+
+when@dev:
+    doctrine:
+        dbal:
+            connections:
+                shared_tenants:
+                    logging: true
+                    profiling: true
+                    profiling_collect_backtrace: true
+                    profiling_collect_schema_errors: true

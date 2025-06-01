@@ -11,8 +11,7 @@ abstract readonly class SharedController
 {
     public function __construct(
         private CommandBus $commandBus,
-    ) {
-    }
+    ) {}
 
     protected function dispatch(Command $command): void
     {

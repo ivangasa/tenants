@@ -3,6 +3,7 @@ grumphp:
         EXEC_GRUMPHP_COMMAND: docker exec -t tenants_api sh -c "XDEBUG_MODE=off vendor/bin/grumphp --config=grumphp.yml run --no-interaction"
 
     tasks:
+
         # https://github.com/phpro/grumphp/blob/v2.x/doc/tasks/composer.md
         composer:
             file: ./composer.json
@@ -28,10 +29,6 @@ grumphp:
             format: ~
             run_always: false
 
-        # https://github.com/phpro/grumphp/blob/v2.x/doc/tasks/deptrac.md
-        deptrac:
-            depfile: ./deptrac.yaml
-
         # https://github.com/phpro/grumphp/blob/v2.x/doc/tasks/phpstan.md
         phpstan:
             autoload_file: ~
@@ -53,7 +50,16 @@ grumphp:
             clear-cache: false
             no-progress-bar: true
 
+       # https://github.com/phpro/grumphp/blob/v2.x/doc/tasks/infection.md
         infection:
             threads: 6
             only_covered: true
             configuration: ./infection.json5
+
+        # https://github.com/phpro/grumphp/blob/v2.x/doc/tasks/phpunit.md
+        phpunit:
+            config_file: ./phpunit.dist.xml
+            testsuite: ~
+            group: [ ]
+            always_execute: false
+            order: null

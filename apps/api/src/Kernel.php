@@ -4,17 +4,29 @@ declare(strict_types=1);
 
 namespace Tenants\Api;
 
+use Exception;
 use Override;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
-class Kernel extends BaseKernel
+final class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    private const string CACHE_DIRECTORY_PATH = '/var/cache/api';
+    private const string CACHE_DIRECTORY_PATH = '/var/cache/apps/api';
     private const string LOG_DIRECTORY_PATH = '/var/logs/api';
+
+    /** @throws Exception */
+    public function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
+    {
+        $configDirectory = $this->getProjectDir() . '/config';
+
+        $loader->load($configDirectory . '/packages/*.{php,xml,yaml,yml}', 'glob');
+        $loader->load($configDirectory . '/packages/**/*.{php,xml,yaml,yml}', 'glob');
+        $loader->load($configDirectory . '/services.yaml');
+    }
 
     #[Override]
     public function getProjectDir(): string

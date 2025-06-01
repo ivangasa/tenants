@@ -1,7 +1,25 @@
+includes:
+    - vendor/phpat/phpat/extension.neon
+
 parameters:
-    level: max
+    level: 10
     tmpDir: var/cache/.phpstan
     paths:
         - apps/
         - src/
         - tests/
+    phpat:
+        ignore_doc_comments: false
+        ignore_built_in_classes: true
+        show_rule_names: true
+
+    exceptions:
+        implicitThrows: false
+        uncheckedExceptionClasses:
+            - LogicException
+
+services:
+    -
+        class: Tenants\Tests\Architecture\Hexagonal\SharedBoundedContext\SharedBoundedContextArchitectureTest
+        tags:
+            - phpat.test

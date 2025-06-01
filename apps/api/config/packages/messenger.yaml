@@ -1,0 +1,42 @@
+framework:
+    messenger:
+        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
+        # failure_transport: failed
+        default_bus: messenger.command.bus
+
+        buses:
+            messenger.command.bus:
+                middleware:
+                    - messenger.middleware.doctrine_ping_connection
+                    - messenger.middleware.doctrine_close_connection
+                    - messenger.middleware.doctrine_transaction
+
+        # https://symfony.com/doc/current/messenger.html#transport-configuration
+        transports:
+            sync: 'sync://'
+            async: 'in-memory://'
+            # async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            # failed: 'doctrine://default?queue_name=failed'
+
+        routing:
+            # Route your messages to the transports
+            # 'App\Message\YourMessage': async
+
+
+when@dev:
+    framework:
+        messenger:
+            transports:
+                # replace with your transport name here (e.g., my_transport: 'in-memory://')
+                # For more Messenger testing tools, see https://github.com/zenstruck/messenger-test
+                sync: 'sync://'
+                async: 'in-memory://'
+
+when@test:
+    framework:
+        messenger:
+            transports:
+                # replace with your transport name here (e.g., my_transport: 'in-memory://')
+                # For more Messenger testing tools, see https://github.com/zenstruck/messenger-test
+                sync: 'sync://'
+                async: 'in-memory://'

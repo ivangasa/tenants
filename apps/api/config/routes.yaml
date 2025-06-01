@@ -1,5 +1,5 @@
-controllers:
+tenants.controllers:
     resource:
-        path: ../src/Controller
-        namespace: Tenants\Api\Controller
+        path: ../src/Ui/Http
+        namespace: Tenants\Api\Ui\Http
     type: attribute

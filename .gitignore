@@ -7,15 +7,22 @@
 /.env.local
 /.env.local.php
 /.env.*.local
+/.env.dev
+/.env.test
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
 
+###> Database Data ###
+./etc/postgres/data/
+###< Database Data ###
+
 ###> phpunit/phpunit ###
-/phpunit.xml
-/.phpunit.cache/
+/phpunit.dist.xml
 ###< phpunit/phpunit ###
 
+###> os ###
 .DS_Store
+###< os ###

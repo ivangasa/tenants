@@ -90,7 +90,6 @@ The project follows a modular structure:
 
 ### Mitigations
 
-- Deptrac is used to enforce architectural boundaries
 - Shared base classes reduce boilerplate code
 - Comprehensive documentation and examples help onboard new developers
 - Automated tests verify that the architecture is correctly implemented

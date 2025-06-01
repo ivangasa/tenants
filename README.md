@@ -42,7 +42,6 @@ make start
 - `make ecs` - Verify code style compliance
 - `make ecs-fix` - Automatically fix code style issues
 - `make infection` - Perform mutation testing
-- `make deptrac` - Validate architectural boundaries
 
 ### Testing Commands
 - `make tests` - Execute all test suites
@@ -72,7 +71,7 @@ The project implements Hexagonal Architecture with the following layers:
 To contribute to this project, all code must pass through GrumPHP validation tasks that ensure code quality and security:
 
 - 🔒 **Security Checks** - Scans for vulnerabilities using Composer Audit and Symfony Security Checker
-- 📐 **Architecture Validation** - Ensures compliance with architectural boundaries using Deptrac
+- 📐 **Architecture Validation** - Ensures compliance with architectural boundaries using PHPat
 - 🔍 **Static Analysis** - Detects potential bugs and errors with PHPStan
 - 🧹 **Code Style** - Enforces coding standards with Easy Coding Standard (ECS)
 - 🧬 **Mutation Testing** - Validates test quality using Infection

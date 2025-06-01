@@ -33,7 +33,7 @@ as the task runner. The following tools have been integrated:
 
 ### 3. Architectural Constraints
 
-- **Tool**: Deptrac
+- **Tool**: PHPat
 - **Purpose**: Enforces architectural dependencies between layers
 - **Configuration**: Defines four layers (Application, Domain, Infrastructure, Ui) with strict dependency rules:
   - Application can depend on Domain
@@ -89,6 +89,6 @@ as the task runner. The following tools have been integrated:
 
 - [GrumPHP Documentation](https://github.com/phpro/grumphp)
 - [PHPStan Documentation](https://phpstan.org/user-guide/getting-started)
-- [Deptrac Documentation](https://github.com/qossmic/deptrac)
+- [PHPat Documentation](https://github.com/carlosas/phpat)
 - [Easy Coding Standard Documentation](https://github.com/symplify/easy-coding-standard)
 - [Infection Documentation](https://infection.github.io/guide/)

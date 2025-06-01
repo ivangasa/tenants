@@ -17,7 +17,7 @@
         "summary": "./var/reports/infection/infection-summary.txt",
     },
     "tmpDir": "/var/cache/infection/infection",
-    "minMsi": 80,
+    "minMsi": 100,
     "minCoveredMsi": 100,
     "testFramework":"phpunit",
     "mutators": {

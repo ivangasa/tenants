@@ -7,7 +7,7 @@ namespace Tenants\Tests\Unit\Shared\Domain\ValueObject;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tenants\Shared\Domain\ValueObject\Exception\InvalidNanoIdException;
-use Tenants\Tests\Unit\Shared\Domain\Mother\NanoIdMother;
+use Tenants\Tests\Unit\Shared\Domain\ValueObject\Mother\NanoIdMother;
 
 final class NanoIdTest extends TestCase
 {
